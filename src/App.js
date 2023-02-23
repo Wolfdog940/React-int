@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from "react"
 import './App.css';
 
+import Nabvar from './components/Nabvar';
+import {IntlProvider}from "react-intl"
+import messages from '../src/lang/index';
+import Body from "./components/Body.jsx";
+
 function App() {
+
+const [local ,setLocal] = useState("es")
+
+const locale = local
+
+const mesagge = messages[local]
+
+useEffect(()=>{
+console.log(local)
+},[local])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <IntlProvider locale = {local} messages ={mesagge}>
+      <Nabvar onLocal={setLocal}/>
+      <Body/>
+    </IntlProvider>
+    
   );
 }
 
